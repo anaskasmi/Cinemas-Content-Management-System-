@@ -20,8 +20,10 @@ public class Cinema implements Serializable {
     private double latitude;
     private double altitude;
     private int nombreSalles;
+    @ToString.Exclude
     @OneToMany(mappedBy ="cinema")
     private Collection<Salle> salles;
+    @ToString.Exclude
     @ManyToOne
     private Ville ville;
 }

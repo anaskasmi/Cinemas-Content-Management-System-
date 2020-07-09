@@ -22,12 +22,14 @@ public class Salle implements Serializable {
     @Column(length = 30)
     private String name;
     private int nombrePlace;
+    @ToString.Exclude
     @JsonProperty(access= JsonProperty.Access.WRITE_ONLY)
     @ManyToOne
     private Cinema cinema;
     @JsonProperty(access= JsonProperty.Access.WRITE_ONLY)
     @OneToMany(mappedBy = "salle")
     private Collection<Place> places;
+    @ToString.Exclude
     @JsonProperty(access= JsonProperty.Access.WRITE_ONLY)
     @OneToMany(mappedBy = "salle")
     private Collection<Projection> projections;
