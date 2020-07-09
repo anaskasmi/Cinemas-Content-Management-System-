@@ -43,7 +43,7 @@ public class CinemasCrudController {
 
         }
         else if(!cityKeyword.isBlank()){
-           cinemas = cinemaRepository.findByVilleNameContains(cityKeyword, PageRequest.of(page, size));
+            cinemas = cinemaRepository.findByVilleNameContains(cityKeyword, PageRequest.of(page, size));
         }
         else{
             cinemas = cinemaRepository.findAll(PageRequest.of(page, size));

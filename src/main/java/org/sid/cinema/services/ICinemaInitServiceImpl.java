@@ -54,6 +54,9 @@ public class ICinemaInitServiceImpl implements ICinemaInitService {
                 cinema.setName(nomCinema);
                 cinema.setNombreSalles(3 + (int) (Math.random() * 7));
                 cinema.setVille(ville);
+                cinema.setAltitude((double)  (Math.random() * (99.99 - 1.22)) + 1.22);
+                cinema.setLongitude((double)  (Math.random() * (99.99 - 1.22)) + 1.22);
+                cinema.setLatitude((double)  (Math.random() * (99.99 - 1.22)) + 1.22);
                 cinemaRepository.save(cinema);
             });
         });
