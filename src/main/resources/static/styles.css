@@ -5,14 +5,16 @@ a {
 .websiteTitle {
     font-family: 'Pacifico', sans-serif;
     font-size: 1.5em;
-    color: #d4f9ff !important;
     transition: font-size 0.5s ease;
+    color: white !important;
+
 }
 .websiteTitle:hover {
-    font-size: 1.6em;
+    font-size: 1.8em;
 }
 a.text-info:hover{
-    color: white !important;
+    color: #3ccee4!important
+
 }
 .pageTitle {
     font-family: 'Lato', sans-serif;

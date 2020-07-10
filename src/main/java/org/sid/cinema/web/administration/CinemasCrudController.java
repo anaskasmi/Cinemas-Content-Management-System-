@@ -30,6 +30,7 @@ public class CinemasCrudController {
     SalleRepository salleRepository;
     @Autowired
     PlaceRepository placeRepository;
+
     @GetMapping("/cinemasList")
     public String cinemasList(
             Model model,
@@ -71,11 +72,15 @@ public class CinemasCrudController {
     @GetMapping("/deleteCinema")
     public String deleteCinema(
             Long id, @RequestParam(name = "page", defaultValue = "0") int page,
-            @RequestParam(name = "size", defaultValue = "5") int size,
-            @RequestParam(name = "keyword", defaultValue = "") String keyword
+            @RequestParam(name = "idKeyword", defaultValue = "") String idKeyword,
+            @RequestParam(name = "nameKeyword", defaultValue = "") String nameKeyword,
+            @RequestParam(name = "cityKeyword", defaultValue = "") String cityKeyword
     ) {
         cinemaRepository.deleteById(id);
-        return "redirect:/cinemasList?page=" + page + "&keyword=" + keyword + "&size=" + size;
+        return "redirect:/cinemasList?page=" + page
+                + "&idKeyword=" + idKeyword
+                + "&nameKeyword=" + nameKeyword +
+                "&cityKeyword=" + cityKeyword;
     }
 
     @GetMapping(path = "/newCinema")
@@ -88,15 +93,84 @@ public class CinemasCrudController {
         return "cinemas/newCinema";
     }
 
+    @GetMapping(path = "/showCinema")
+    public String showCinema(
+            Model model,
+            @RequestParam(name = "id") Long id,
+            @RequestParam(name = "page", defaultValue = "0") int page,
+            @RequestParam(name = "idKeyword", defaultValue = "") String idKeyword,
+            @RequestParam(name = "nameKeyword", defaultValue = "") String nameKeyword,
+            @RequestParam(name = "cityKeyword", defaultValue = "") String cityKeyword
+            )
+    {
+
+        Cinema cinema = cinemaRepository.findById(id).get();
+        model.addAttribute("cinema",cinema);
+        model.addAttribute("currentPage", page);
+        model.addAttribute("idKeyword", idKeyword);
+        model.addAttribute("nameKeyword", nameKeyword);
+        model.addAttribute("cityKeyword", cityKeyword);
+        return "cinemas/showCinema";
+    }
+
+    @GetMapping(path = "/editCinema")
+    public String editCinema(
+            Model model,
+            @RequestParam(name = "id") Long id,
+            @RequestParam(name = "page", defaultValue = "0") int page,
+            @RequestParam(name = "idKeyword", defaultValue = "") String idKeyword,
+            @RequestParam(name = "nameKeyword", defaultValue = "") String nameKeyword,
+            @RequestParam(name = "cityKeyword", defaultValue = "") String cityKeyword
+    )
+    {
+        Cinema cinema = cinemaRepository.findById(id).get();
+        List<Ville> cities = villeRepository.findAll();
+
+
+        CinemaFormPayload cinemaFormPayload =new CinemaFormPayload();
+        cinemaFormPayload.setId(id);
+        cinemaFormPayload.setName(cinema.getName());
+        cinemaFormPayload.setCityId(cinema.getVille().getId());
+        cinemaFormPayload.setNombreSalles(cinema.getNombreSalles());
+        cinemaFormPayload.setLatitude(cinema.getLatitude());
+        cinemaFormPayload.setAltitude(cinema.getAltitude());
+        cinemaFormPayload.setLongitude(cinema.getLongitude());
+
+        model.addAttribute("cinemaFormPayload",cinemaFormPayload);
+        model.addAttribute("cities", cities);
+        model.addAttribute("currentPage", page);
+        model.addAttribute("idKeyword", idKeyword);
+        model.addAttribute("nameKeyword", nameKeyword);
+        model.addAttribute("cityKeyword", cityKeyword);
+        return "cinemas/editCinema";
+    }
+
+    @PostMapping(path = "/updateCinema")
+    public String updateCinema(@Valid CinemaFormPayload cinemaFormPayload, BindingResult bindingResult) {
+        if (bindingResult.hasErrors()) {
+            return "cinemas/editCinema?id="+cinemaFormPayload.getId();
+        }
+        System.out.println("payload : " + cinemaFormPayload.toString());
+
+        Cinema cinema = new Cinema();
+        Ville ville = villeRepository.findById(cinemaFormPayload.getCityId()).get();
+        cinema.setId(cinemaFormPayload.getId());
+        cinema.setName(cinemaFormPayload.getName());
+        cinema.setAltitude(cinemaFormPayload.getAltitude());
+        cinema.setLongitude(cinemaFormPayload.getLongitude());
+        cinema.setLatitude(cinemaFormPayload.getLatitude());
+        cinema.setVille(ville);
+        cinemaRepository.save(cinema);
+        return "redirect:/showCinema?id="+cinemaFormPayload.getId();
+    }
+
     @PostMapping(path = "/saveCinema")
     public String saveCinema(@Valid CinemaFormPayload cinemaFormPayload, BindingResult bindingResult) {
-        if(bindingResult.hasErrors())
-        {
+        if (bindingResult.hasErrors()) {
             return "cinemas/newCinema";
         }
         Cinema cinema = new Cinema();
         Ville ville;
-        System.out.println("payload : "+ cinemaFormPayload.toString());
         ville = villeRepository.findById(cinemaFormPayload.getCityId()).get();
         cinema.setVille(ville);
         cinema.setName(cinemaFormPayload.getName());
@@ -104,8 +178,6 @@ public class CinemasCrudController {
         cinema.setLongitude(cinemaFormPayload.getLongitude());
         cinema.setAltitude(cinemaFormPayload.getAltitude());
         cinema.setNombreSalles(cinemaFormPayload.getNombreSalles());
-        System.out.println("ville : "+ ville.getName());
-        System.out.println("cinema : "+ cinema.toString());
         cinemaRepository.save(cinema);
         for (int i = 0; i < cinema.getNombreSalles(); i++) {
             Salle salle = new Salle();

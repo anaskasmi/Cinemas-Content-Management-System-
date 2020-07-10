@@ -143,10 +143,10 @@
                     +#numbers.formatDecimal(c.altitude, 0, 'COMMA', 2, 'POINT')
                     }"></td>
                 <td class="my-2">
-                    <a th:href="@{deleteCinema(id=${c.id},page=${currentPage},idKeyword=${idKeyword},nameKeyword=${nameKeyword},cityKeyword=${cityKeyword},size=${size})}">
+                    <a th:href="@{showCinema(id=${c.id},page=${currentPage},idKeyword=${idKeyword},nameKeyword=${nameKeyword},cityKeyword=${cityKeyword},size=${size})}">
                         <i class="fa fa-file-alt text-info mx-1" aria-hidden="true"></i>
                     </a>
-                    <a th:href="@{deleteCinema(id=${c.id},page=${currentPage},idKeyword=${idKeyword},nameKeyword=${nameKeyword},cityKeyword=${cityKeyword},size=${size})}">
+                    <a th:href="@{editCinema(id=${c.id},page=${currentPage},idKeyword=${idKeyword},nameKeyword=${nameKeyword},cityKeyword=${cityKeyword},size=${size})}">
                         <i class="fa fa-pen text-success mx-3" aria-hidden="true"></i>
                     </a>
                     <a th:href="@{deleteCinema(id=${c.id},page=${currentPage},idKeyword=${idKeyword},nameKeyword=${nameKeyword},cityKeyword=${cityKeyword},size=${size})}">

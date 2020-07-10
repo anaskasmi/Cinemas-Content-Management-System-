@@ -14,6 +14,7 @@ import javax.validation.constraints.Size;
 @Data
 @ToString
 public class CinemaFormPayload {
+    private Long id;
     @NotNull
     @Size(min=1,max = 29)
     private String name;

@@ -1,0 +1,81 @@
+<!DOCTYPE html>
+<html lang="en"
+      xmlns:th="http://www.thymeleaf.org"
+      xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
+      layout:decorator="template.html"
+>
+<head>
+    <meta charset="UTF-8">
+    <title>New Cinemas</title>
+</head>
+<body>
+<div layout:fragment="pageContent">
+    <div class="row col-12 justify-content-between mb-2 ">
+        <div class="pageTitle">
+            <img src="./images/clapperboard.png" alt="" class="titleLogo mb-4">
+            Cinemas
+        </div>
+        <div onclick='javascript:window.history.back()' class="my-auto btn btn-outline-info">
+
+            <i class="fas fa-undo"></i>
+            Go back
+        </div>
+
+    </div>
+
+    <hr class="mt-2 mb-5">
+    <!--Content-->
+    <div class="container ">
+        <div class="card shadow-lg ">
+
+            <div class="card-header text-center text-uppercase text-white bg-dark font-weight-bold">
+                Cinema's Info
+            </div>
+            <div class="card-body px-5 pt-5">
+                <div class="row col-md-12 justify-content-between ml-0 px-0">
+                    <a class="btn btn-success btn-block col-md-5 my-auto ml-3 shadow-sm"
+                       th:href="@{editCinema(id=${cinema.id},page=${currentPage},idKeyword=${idKeyword},nameKeyword=${nameKeyword},cityKeyword=${cityKeyword})}">
+                        <i class="fa fa-pen  mx-1" aria-hidden="true"></i>
+                        Edit
+                    </a>
+                    <a class="btn btn-outline-danger btn-block col-md-5 my-auto mr-3 shadow-sm"
+                       th:href="@{deleteCinema(id=${cinema.id},page=${currentPage},idKeyword=${idKeyword},nameKeyword=${nameKeyword},cityKeyword=${cityKeyword})}"
+                    >
+                        <i class="fa fa-trash  mx-1" aria-hidden="true"></i>
+                        Delete
+                    </a>
+                </div>
+                <br>
+                <table class="table table-striped mt-2">
+                    <tr>
+                        <td class="font-weight-bold">ID</td>
+                        <td th:text="${cinema.id}"></td>
+                    </tr>
+                    <tr>
+                        <td class="font-weight-bold">Name</td>
+                        <td th:text="${cinema.name}"></td>
+                    </tr>
+                    <tr>
+                        <td  class="font-weight-bold">City</td>
+                        <td th:text="${cinema.ville.getName()}"></td>
+                    </tr>
+                    <tr>
+                        <td  class="font-weight-bold">Rooms number</td>
+                        <td th:text="${cinema.nombreSalles}"></td>
+                    </tr>
+                    <tr>
+                        <td  class="font-weight-bold">Coordinates</td>
+                        <td th:text="${#numbers.formatDecimal(cinema.latitude, 0,'COMMA', 2, 'POINT') + ' - '
+                        +#numbers.formatDecimal(cinema.longitude, 0, 'COMMA', 2, 'POINT')+' - '
+                        +#numbers.formatDecimal(cinema.altitude, 0, 'COMMA', 2, 'POINT')
+                        }"></td>
+                    </tr>
+                </table>
+            </div>
+        </div>
+
+    </div>
+
+</div>
+</body>
+</html>
