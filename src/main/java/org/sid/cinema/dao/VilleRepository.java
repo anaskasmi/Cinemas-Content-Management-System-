@@ -8,6 +8,5 @@ import org.springframework.web.bind.annotation.CrossOrigin;
 @RepositoryRestResource
 @CrossOrigin("*")
 public interface VilleRepository extends JpaRepository<Ville,Long> {
-    
 
 }

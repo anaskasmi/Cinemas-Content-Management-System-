@@ -5,18 +5,15 @@ import lombok.Data;
 import lombok.NoArgsConstructor;
 import lombok.ToString;
 
-import javax.persistence.*;
 import javax.validation.constraints.Min;
 import javax.validation.constraints.NotNull;
 import javax.validation.constraints.Size;
-import java.io.Serializable;
-import java.util.Collection;
-@Entity
-@Data @AllArgsConstructor @NoArgsConstructor @ToString
-public class Cinema implements Serializable {
-    @Id @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private Long id;
-    @Column(length = 30)
+
+@NoArgsConstructor
+@AllArgsConstructor
+@Data
+@ToString
+public class CinemaFormPayload {
     @NotNull
     @Size(min=1,max = 29)
     private String name;
@@ -26,11 +23,6 @@ public class Cinema implements Serializable {
     @NotNull
     @Min(0)
     private int nombreSalles;
-    @ToString.Exclude
-    @OneToMany(mappedBy ="cinema")
-    private Collection<Salle> salles;
     @NotNull
-    @ToString.Exclude
-    @ManyToOne
-    private Ville ville;
+    private Long cityId;
 }

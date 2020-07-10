@@ -11,23 +11,23 @@
 <body>
 <div layout:fragment="pageContent">
     <div class="row col-12 justify-content-between mb-2 ">
-        <div class="pageTitle ">
+        <div class="pageTitle">
+            <img src="./images/clapperboard.png" alt="" class="titleLogo mb-4"  >
             Cinemas
         </div>
-        <div class="btn btn-outline-info my-auto">
-            <i class="fas fa-film mr-2"></i>
-            <a th:href="@{newCinema}">
-                New Cinema
-            </a>
 
-        </div>
+        <a th:href="@{newCinema}" class="my-auto btn btn-outline-info shadow-sm">
+            <i class="fas fa-film mr-2"></i>
+            New Cinema
+        </a>
+
     </div>
 
     <hr class="mt-2 mb-5">
 
     <div class="">
         <button data-toggle="collapse" data-target="#searchPanel"
-                class="btn btn-outline-info btn-block mb-4">
+                class="btn btn-info btn-block mb-4 shadow-sm">
             <!--                <i class="fa fa-arrow-down mr-3" aria-hidden="true"></i>-->
             <i class="fa fa-search mr-3" aria-hidden="true"></i>
             Search Options
@@ -37,8 +37,8 @@
             <div class="row col-12 mb-4">
                 <!--start search by id -->
                 <div class="col-4">
-                    <div class="card bg-light">
-                        <div class="card-header font-weight-bold text-info-strong text-center text-uppercase" >
+                    <div class="card bg-light shadow">
+                        <div class="card-header font-weight-bold text-info-strong text-center text-uppercase">
                             <i class="fab fa-slack-hash"></i>
                             Search by ID
                         </div>
@@ -65,7 +65,7 @@
                 <!--end search by id-->
                 <!-- start search by name-->
                 <div class="col-4">
-                    <div class="card bg-light">
+                    <div class="card bg-light shadow">
                         <div class="card-header font-weight-bold text-info-strong text-center text-uppercase ">
                             <i class="fas fa-marker"></i>
                             Search by Name
@@ -94,7 +94,7 @@
                 <!--end search by name-->
                 <!--start search by city-->
                 <div class="col-4">
-                    <div class="card bg-light">
+                    <div class="card bg-light shadow">
                         <div class="card-header font-weight-bold text-info-strong text-center text-uppercase ">
                             <i class="fas fa-city"></i>
                             Search by City
@@ -123,7 +123,7 @@
             </div>
         </div>
 
-        <table class="table table-bordered table-hover table-striped">
+        <table class="table table-bordered table-hover table-striped shadow-sm">
             <tr class=" thead-dark text-center">
                 <th>Id</th>
                 <th>Name</th>
@@ -163,7 +163,7 @@
 
                 >
                     <a
-                            th:class="${currentPage+1==pageNumber}?'btn btn-info font-weight-bold mx-2':'btn btn-outline-info mx-2'"
+                            th:class="${currentPage+1==pageNumber}?'btn btn-info font-weight-bold mx-2 shadow-sm':'btn btn-outline-info mx-2 shadow-sm'"
                             th:text="${pageNumber}"
                             th:href="@{cinemasList(page=${pageNumber}-1,keyword=${keyword})}">
                     </a>
