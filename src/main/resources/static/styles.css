@@ -1,0 +1,20 @@
+.websiteTitle {
+    font-family: 'Pacifico', sans-serif;
+    font-size: 1.5em;
+    color:#4bd6ec!important
+}
+.pageTitle {
+    font-family: 'Lato', sans-serif;
+    font-size: 4em;
+    text-align: left;
+    color:#343a40!important;
+}
+.text-info-strong{
+    color: #0b7788!important;
+}
+.card{
+    border-radius: 0;
+}
+.btn{
+    border-radius: 0;
+}

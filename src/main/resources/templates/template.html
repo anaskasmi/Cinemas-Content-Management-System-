@@ -1,10 +1,75 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="en" xmlns:th="http://www.thymeleaf.org" xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout">
 <head>
     <meta charset="UTF-8">
-    <title>Title</title>
+    <title>Cinemas</title>
+    <!--    bootstrap-->
+    <link rel="stylesheet" type="text/css" href="/webjars/bootstrap/4.1.3/css/bootstrap.min.css">
+    <!--    font awsome-->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.13.1/css/all.min.css">
+    <!--    fonts -->
+    <link href="https://fonts.googleapis.com/css2?family=Quicksand:wght@700&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Pacifico&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Lato&display=swap" rel="stylesheet">
+
+    <!--styles-->
+    <link rel="stylesheet" href="./styles.css">
+    <!--    jquery-->
+    <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"
+            integrity="sha256-4+XzXVhsDmqanXGHaHvgh1gMQKX40OUvDEBTu8JcmNs=" crossorigin="anonymous"></script>
+
+    <!--    bootstrap javascript-->
+    <script src="/webjars/bootstrap/4.1.3/js/bootstrap.min.js"></script>
+
+
 </head>
 <body>
+<nav class="navbar navbar-expand-sm bg-dark navbar-dark">
+    <!-- Brand -->
+    <a class="navbar-brand websiteTitle text-info mr-4" href="#">Cinema Teal</a>
+
+    <!-- Links -->
+    <ul class="navbar-nav">
+        <li class="nav-item">
+            <a class="nav-link" href="#">Cinemas</a>
+        </li>
+        <li class="nav-item">
+            <a class="nav-link" href="#">Cities</a>
+        </li>
+        <li class="nav-item">
+            <a class="nav-link" href="#">Tickets</a>
+        </li>
+        <li class="nav-item">
+            <a class="nav-link" href="#">Rooms</a>
+        </li>
+        <li class="nav-item">
+            <a class="nav-link" href="#">Movies</a>
+        </li>
+        <li class="nav-item">
+            <a class="nav-link" href="#">Sessions</a>
+        </li>
+        <li class="nav-item">
+            <a class="nav-link" href="#">Categories</a>
+        </li>
+    </ul>
+    <ul class="navbar-nav ml-auto">
+        <!-- Dropdown -->
+        <li class="nav-item dropdown ">
+            <a class="nav-link dropdown-toggle" href="#" id="navbardrop" data-toggle="dropdown">
+                Username
+            </a>
+            <div class="dropdown-menu pr-0 mr-0">
+                <a class="dropdown-item pr-0" href="#">Logout</a>
+            </div>
+        </li>
+    </ul>
+</nav>
+<div class="my-5 mx-5 ">
+    <section layout:fragment="pageContent">
+
+    </section>
+</div>
+
 
 </body>
 </html>

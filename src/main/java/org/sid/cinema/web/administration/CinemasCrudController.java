@@ -56,7 +56,7 @@ public class CinemasCrudController {
         model.addAttribute("cityKeyword", cityKeyword);
         model.addAttribute("size", size);
 
-        return "cinemasList";
+        return "cinemas/cinemasList";
     }
 
     @GetMapping("/deleteCinema")
@@ -67,5 +67,10 @@ public class CinemasCrudController {
     ) {
         cinemaRepository.deleteById(id);
         return "redirect:/cinemasList?page=" + page + "&keyword=" + keyword + "&size=" + size;
+    }
+    @GetMapping("/test")
+    public String test()
+    {
+        return "template";
     }
 }
