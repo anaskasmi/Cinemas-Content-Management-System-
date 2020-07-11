@@ -4,6 +4,8 @@ import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 import lombok.ToString;
+import org.hibernate.annotations.OnDelete;
+import org.hibernate.annotations.OnDeleteAction;
 
 import javax.persistence.*;
 import javax.validation.constraints.Min;
@@ -27,7 +29,7 @@ public class Cinema implements Serializable {
     @Min(0)
     private int nombreSalles;
     @ToString.Exclude
-    @OneToMany(mappedBy ="cinema")
+    @OneToMany(mappedBy ="cinema", orphanRemoval = true, cascade = CascadeType.PERSIST)
     private Collection<Salle> salles;
     @NotNull
     @ToString.Exclude

@@ -5,6 +5,8 @@ import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 import lombok.ToString;
+import org.hibernate.annotations.OnDelete;
+import org.hibernate.annotations.OnDeleteAction;
 
 import javax.persistence.*;
 import java.io.Serializable;
@@ -25,13 +27,14 @@ public class Salle implements Serializable {
     @ToString.Exclude
     @JsonProperty(access= JsonProperty.Access.WRITE_ONLY)
     @ManyToOne
+    @OnDelete(action = OnDeleteAction.CASCADE)
     private Cinema cinema;
     @JsonProperty(access= JsonProperty.Access.WRITE_ONLY)
-    @OneToMany(mappedBy = "salle")
+    @OneToMany(mappedBy = "salle", orphanRemoval = true, cascade = CascadeType.PERSIST)
     private Collection<Place> places;
     @ToString.Exclude
     @JsonProperty(access= JsonProperty.Access.WRITE_ONLY)
-    @OneToMany(mappedBy = "salle")
+    @OneToMany(mappedBy = "salle", orphanRemoval = true, cascade = CascadeType.PERSIST)
     private Collection<Projection> projections;
 
 }

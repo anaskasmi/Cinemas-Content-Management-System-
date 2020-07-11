@@ -22,7 +22,7 @@ public class Ville {
     private double longitude;
     private double latitude;
     private double altitude;
-    @OneToMany(mappedBy = "ville")
+    @OneToMany(mappedBy = "ville", orphanRemoval = true, cascade = CascadeType.PERSIST)
     private Collection<Cinema> cinemas;
 
 }

@@ -1,0 +1,118 @@
+<!DOCTYPE html>
+<html lang="en"
+      xmlns:th="http://www.thymeleaf.org"
+      xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
+      layout:decorator="template.html"
+>
+<head>
+    <meta charset="UTF-8">
+    <title>Cities</title>
+</head>
+<body>
+<div layout:fragment="pageContent">
+    <div class="row col-12 justify-content-between mb-2 ">
+        <div class="pageTitle">
+            <img src="./images/buildings.png" alt="" class="titleLogo mb-4 mr-2"  >
+            Cities
+        </div>
+
+        <a th:href="@{newCity}" class="my-auto btn btn-outline-info shadow-sm">
+            <i class="fas fa-film mr-2"></i>
+            New City
+        </a>
+
+    </div>
+
+    <hr class="mt-2 mb-5">
+
+    <div class="">
+        <button data-toggle="collapse" data-target="#searchPanel"
+                class="btn btn-info btn-block mb-4 shadow-sm">
+            <!--                <i class="fa fa-arrow-down mr-3" aria-hidden="true"></i>-->
+            <i class="fa fa-search mr-3" aria-hidden="true"></i>
+            Search Options
+        </button>
+        <div id="searchPanel" class="collapse">
+
+            <div class="row col-12 mb-4">
+                <div class="col-12">
+                    <div class="card bg-light shadow">
+                        <div class="card-header font-weight-bold text-info-strong text-center text-uppercase ">
+                            <i class="fas fa-marker"></i>
+                            Search by Name
+                        </div>
+                        <div class="card-body text-center">
+                            <form th:action="@{citiesList}" method="get">
+                                <div class="input-group mb-4">
+                                    <input type="search"
+                                           name="nameKeyword"
+                                           placeholder="City's Name"
+
+                                           class="form-control"
+                                           th:value="${nameKeyword}"
+                                    >
+                                    <div class="input-group-prepend">
+                                        <button type="submit" class="btn btn-dark">
+                                            <i class="fa fa-search" aria-hidden="true">
+                                            </i>
+                                        </button>
+                                    </div>
+                                </div>
+                            </form>
+                        </div>
+                    </div>
+                </div>
+                <!--end search by name-->
+
+            </div>
+        </div>
+
+        <table class="table table-bordered table-hover table-striped shadow-sm">
+            <tr class=" thead-dark text-center">
+                <th>Id</th>
+                <th>Name</th>
+                <th>Coordinates</th>
+                <th></th>
+            </tr>
+            <tr th:each="c:${cities}" class="text-center">
+                <td th:text="${c.id}"></td>
+                <td th:text="${c.name}"></td>
+                <td th:text="${
+                    #numbers.formatDecimal(c.latitude, 0, 'COMMA', 2, 'POINT') + ','
+                    +#numbers.formatDecimal(c.longitude, 0, 'COMMA', 2, 'POINT')+','
+                    +#numbers.formatDecimal(c.altitude, 0, 'COMMA', 2, 'POINT')
+                    }"></td>
+                <td class="my-2">
+                    <a th:href="@{showCity(id=${c.id},page=${currentPage},idKeyword=${idKeyword},nameKeyword=${nameKeyword},cityKeyword=${cityKeyword},size=${size})}">
+                        <i class="fa fa-file-alt text-info mx-1" aria-hidden="true"></i>
+                    </a>
+                    <a th:href="@{editCity(id=${c.id},page=${currentPage},idKeyword=${idKeyword},nameKeyword=${nameKeyword},cityKeyword=${cityKeyword},size=${size})}">
+                        <i class="fa fa-pen text-success mx-3" aria-hidden="true"></i>
+                    </a>
+                    <a th:href="@{deleteCity(id=${c.id},page=${currentPage},idKeyword=${idKeyword},nameKeyword=${nameKeyword},cityKeyword=${cityKeyword},size=${size})}">
+                        <i class="fa fa-trash text-danger mx-1" aria-hidden="true"></i>
+                    </a>
+                </td>
+            </tr>
+        </table>
+    </div>
+    <div class="mt-3">
+        <nav>
+            <ul class="pagination justify-content-center ">
+                <li th:each="pageNumber :${#numbers.sequence(1, pages)}"
+
+                >
+                    <a
+                            th:class="${currentPage+1==pageNumber}?'btn btn-info font-weight-bold mx-2 shadow-sm':'btn btn-outline-info mx-2 shadow-sm'"
+                            th:text="${pageNumber}"
+                            th:href="@{citiesList(page=${pageNumber}-1,keyword=${keyword})}">
+                    </a>
+                </li>
+            </ul>
+        </nav>
+    </div>
+
+
+</div>
+</body>
+</html>

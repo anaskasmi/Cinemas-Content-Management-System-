@@ -15,6 +15,6 @@ public class Categorie {
     private Long id;
     @Column(length = 30)
     private String name;
-    @OneToMany(mappedBy ="categorie")
+    @OneToMany(mappedBy ="categorie", orphanRemoval = true, cascade = CascadeType.PERSIST)
     private Collection<Film> films;
 }

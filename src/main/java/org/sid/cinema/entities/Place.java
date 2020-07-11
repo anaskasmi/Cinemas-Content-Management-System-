@@ -5,6 +5,8 @@ import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 import lombok.ToString;
+import org.hibernate.annotations.OnDelete;
+import org.hibernate.annotations.OnDeleteAction;
 
 import javax.persistence.*;
 import java.util.Collection;
@@ -21,7 +23,7 @@ public class Place {
     @ManyToOne
     private Salle salle;
     @JsonProperty(access= JsonProperty.Access.WRITE_ONLY)
-    @OneToMany(mappedBy = "place")
+    @OneToMany(mappedBy = "place", orphanRemoval = true, cascade = CascadeType.PERSIST)
     private Collection<Ticket> tickets;
 
 }

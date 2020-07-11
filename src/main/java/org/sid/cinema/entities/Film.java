@@ -3,6 +3,8 @@ package org.sid.cinema.entities;
 import lombok.AllArgsConstructor;
 import lombok.NoArgsConstructor;
 import lombok.ToString;
+import org.hibernate.annotations.OnDelete;
+import org.hibernate.annotations.OnDeleteAction;
 
 import javax.persistence.*;
 import java.util.Collection;
@@ -26,7 +28,7 @@ public class Film {
     private String photo;
     @ManyToOne
     private Categorie categorie;
-    @OneToMany(mappedBy = "film")
+    @OneToMany(mappedBy = "film", orphanRemoval = true, cascade = CascadeType.PERSIST)
     private Collection<Projection> projections;
 
 }
