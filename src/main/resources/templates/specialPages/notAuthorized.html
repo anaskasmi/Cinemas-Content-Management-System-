@@ -1,0 +1,22 @@
+<!DOCTYPE html>
+<html lang="en"
+      xmlns:th="http://www.thymeleaf.org"
+      xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
+      layout:decorator="template.html"
+>
+<head>
+    <meta charset="UTF-8">
+    <title>Not Authorized</title>
+</head>
+<body>
+<div layout:fragment="pageContent">
+    <div class="container text-center">
+        <img src="./images/shield.png" class="mb-4" style="max-width: 10em" alt="">
+
+        <div class="bg-dark text-white text-center text-uppercase font-weight-bold py-5 ">
+            Sorry, you are not Authorized to visit this page !
+        </div>
+    </div>
+</div>
+</body>
+</html>

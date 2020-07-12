@@ -16,7 +16,7 @@
             Rooms
         </div>
 
-        <a th:href="@{newCinema}" class="my-auto btn btn-outline-info shadow-sm">
+        <a th:href="@{newCinema}" class="my-auto btn btn-outline-info shadow-sm" sec:authorize="hasRole('ADMIN')">
             <i class="fas fa-film mr-2"></i>
             New Room
         </a>
@@ -40,7 +40,7 @@
                         <div class="card bg-light shadow">
                             <div class="card-header font-weight-bold text-info-strong text-center text-uppercase">
                                 <i class="fab fa-slack-hash"></i>
-                                City Name
+                                City Name<small class="text-danger">- required</small>
                             </div>
                             <div class="card-body text-center">
                                 <div class="input-group mb-4">
@@ -60,7 +60,7 @@
                         <div class="card bg-light shadow">
                             <div class="card-header font-weight-bold text-info-strong text-center text-uppercase ">
                                 <i class="fas fa-marker"></i>
-                                Cinema Name
+                                Cinema Name <small class="text-danger">- required</small>
                             </div>
                             <div class="card-body text-center">
                                 <div class="input-group mb-4">
@@ -97,7 +97,7 @@
                         </div>
                     </div>
                     <!--end search by Room name-->
-                    <button type="submit" class="btn btn-outline-secondary btn-block mt-3 mb-5 mx-3 shadow">
+                    <button type="submit" class="btn btn-secondary btn-block mt-3 mb-5 mx-3 shadow">
                         <li class="fa fa-search "></li>
                     </button>
                 </div>
@@ -122,10 +122,10 @@
                     <a th:href="@{showRoom(id=${r.id},page=${currentPage},cityNameKeyword=${cityNameKeyword},cinemaNameKeyword=${cinemaNameKeyword},roomNameKeyword=${roomNameKeyword})}">
                         <i class="fa fa-file-alt text-info mx-1" aria-hidden="true"></i>
                     </a>
-                    <a th:href="@{editRoom(id=${r.id},page=${currentPage},cityNameKeyword=${cityNameKeyword},cinemaNameKeyword=${cinemaNameKeyword},roomNameKeyword=${roomNameKeyword})}">
+                    <a sec:authorize="hasRole('ADMIN')" th:href="@{editRoom(id=${r.id},page=${currentPage},cityNameKeyword=${cityNameKeyword},cinemaNameKeyword=${cinemaNameKeyword},roomNameKeyword=${roomNameKeyword})}">
                         <i class="fa fa-pen text-success mx-3" aria-hidden="true"></i>
                     </a>
-                    <a th:href="@{deleteRoom(id=${r.id},page=${currentPage},cityNameKeyword=${cityNameKeyword},cinemaNameKeyword=${cinemaNameKeyword},roomNameKeyword=${roomNameKeyword})}">
+                    <a sec:authorize="hasRole('ADMIN')" th:href="@{deleteRoom(id=${r.id},page=${currentPage},cityNameKeyword=${cityNameKeyword},cinemaNameKeyword=${cinemaNameKeyword},roomNameKeyword=${roomNameKeyword})}">
                         <i class="fa fa-trash text-danger mx-1" aria-hidden="true"></i>
                     </a>
                 </td>

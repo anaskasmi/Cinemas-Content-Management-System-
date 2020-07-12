@@ -32,7 +32,7 @@
                 City's Info
             </div>
             <div class="card-body px-5 pt-5">
-                <div class="row col-md-12 justify-content-between ml-0 px-0">
+                <div class="row col-md-12 justify-content-between ml-0 px-0" sec:authorize="hasRole('ADMIN')">
                     <a class="btn btn-success btn-block col-md-5 my-auto ml-3 shadow-sm"
                        th:href="@{editCity(id=${city.id},page=${currentPage},nameKeyword=${nameKeyword})}">
                         <i class="fa fa-pen  mx-1" aria-hidden="true"></i>

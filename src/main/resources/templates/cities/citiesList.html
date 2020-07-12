@@ -16,7 +16,7 @@
             Cities
         </div>
 
-        <a th:href="@{newCity}" class="my-auto btn btn-outline-info shadow-sm">
+        <a th:href="@{newCity}" class="my-auto btn btn-outline-info shadow-sm" sec:authorize="hasRole('ADMIN')">
             <i class="fas fa-film mr-2"></i>
             New City
         </a>
@@ -86,10 +86,10 @@
                     <a th:href="@{showCity(id=${c.id},page=${currentPage},idKeyword=${idKeyword},nameKeyword=${nameKeyword},cityKeyword=${cityKeyword},size=${size})}">
                         <i class="fa fa-file-alt text-info mx-1" aria-hidden="true"></i>
                     </a>
-                    <a th:href="@{editCity(id=${c.id},page=${currentPage},idKeyword=${idKeyword},nameKeyword=${nameKeyword},cityKeyword=${cityKeyword},size=${size})}">
+                    <a sec:authorize="hasRole('ADMIN')" th:href="@{editCity(id=${c.id},page=${currentPage},idKeyword=${idKeyword},nameKeyword=${nameKeyword},cityKeyword=${cityKeyword},size=${size})}">
                         <i class="fa fa-pen text-success mx-3" aria-hidden="true"></i>
                     </a>
-                    <a th:href="@{deleteCity(id=${c.id},page=${currentPage},idKeyword=${idKeyword},nameKeyword=${nameKeyword},cityKeyword=${cityKeyword},size=${size})}">
+                    <a sec:authorize="hasRole('ADMIN')" th:href="@{deleteCity(id=${c.id},page=${currentPage},idKeyword=${idKeyword},nameKeyword=${nameKeyword},cityKeyword=${cityKeyword},size=${size})}">
                         <i class="fa fa-trash text-danger mx-1" aria-hidden="true"></i>
                     </a>
                 </td>

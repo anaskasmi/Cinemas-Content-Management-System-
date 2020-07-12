@@ -3,12 +3,15 @@ package org.sid.cinema.services;
 import org.sid.cinema.dao.*;
 import org.sid.cinema.entities.*;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
+import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
 
 import javax.transaction.Transactional;
 import java.text.DateFormat;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
+import java.util.Arrays;
 import java.util.Date;
 import java.util.List;
 import java.util.Random;
@@ -36,6 +39,12 @@ public class ICinemaInitServiceImpl implements ICinemaInitService {
     private SeanceRepository seanceRepository;
     @Autowired
     private TicketRepository ticketRepository;
+    @Autowired
+    private RoleRepository roleRepository;
+    @Autowired
+    private UserRepository userRepository;
+    @Autowired
+    private UserRoleRepository userRoleRepository;
 
     @Override
     public void initVilles() {
@@ -54,9 +63,9 @@ public class ICinemaInitServiceImpl implements ICinemaInitService {
                 cinema.setName(nomCinema);
                 cinema.setNombreSalles(3 + (int) (Math.random() * 7));
                 cinema.setVille(ville);
-                cinema.setAltitude((double)  (Math.random() * (99.99 - 1.22)) + 1.22);
-                cinema.setLongitude((double)  (Math.random() * (99.99 - 1.22)) + 1.22);
-                cinema.setLatitude((double)  (Math.random() * (99.99 - 1.22)) + 1.22);
+                cinema.setAltitude((double) (Math.random() * (99.99 - 1.22)) + 1.22);
+                cinema.setLongitude((double) (Math.random() * (99.99 - 1.22)) + 1.22);
+                cinema.setLatitude((double) (Math.random() * (99.99 - 1.22)) + 1.22);
                 cinemaRepository.save(cinema);
             });
         });
@@ -163,6 +172,51 @@ public class ICinemaInitServiceImpl implements ICinemaInitService {
                 ticketRepository.save(ticket);
             });
         });
+    }
+
+    @Override
+    public void initRoles() {
+        Stream.of("ADMIN", "USER").forEach(roleName -> {
+            Role role = new Role();
+            role.setName(roleName);
+            roleRepository.save(role);
+        });
+    }
+
+    @Override
+    public void initAdmins() {
+        PasswordEncoder passwordEncoder = new BCryptPasswordEncoder();
+        for (String userName : Arrays.asList("admin", "anas kasmi")) {
+            User user = new User();
+            user.setUsername(userName);
+            user.setPassword(passwordEncoder.encode("123"));
+            user.setEnabled(true);
+            userRepository.save(user);
+            Role adminRole = roleRepository.findById((long) 1).get();
+            UserRole userRole = new UserRole();
+            userRole.setRole(adminRole);
+            userRole.setUser(user);
+
+            userRoleRepository.save(userRole);
+        }
+
+    }
+
+    @Override
+    public void initSimpleUsers() {
+        PasswordEncoder passwordEncoder = new BCryptPasswordEncoder();
+        for (String userName : Arrays.asList("user", "user1","user2")) {
+            User user = new User();
+            user.setUsername(userName);
+            user.setPassword(passwordEncoder.encode("123"));
+            user.setEnabled(true);
+            userRepository.save(user);
+            Role adminRole = roleRepository.findById((long) 2).get();
+            UserRole userRole = new UserRole();
+            userRole.setRole(adminRole);
+            userRole.setUser(user);
+            userRoleRepository.save(userRole);
+        }
     }
 }
 

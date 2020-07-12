@@ -22,4 +22,9 @@ public interface ICinemaInitService {
 
     public void initTickets();
 
+    public void initRoles();
+
+    public void initAdmins();
+
+    public void initSimpleUsers();
 }
