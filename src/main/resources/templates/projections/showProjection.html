@@ -1,0 +1,74 @@
+<!DOCTYPE html>
+<html lang="en"
+      xmlns:th="http://www.thymeleaf.org"
+      xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
+      layout:decorator="template.html"
+>
+<head>
+    <meta charset="UTF-8">
+    <title>Rooms</title>
+</head>
+<body>
+<div layout:fragment="pageContent">
+    <div class="row col-12 justify-content-between mb-2 ">
+        <div class="pageTitle">
+            <img src="./images/watch-movie.png" alt="" class="titleLogo mb-2 mr-3">
+            Rooms
+        </div>
+        <div onclick='javascript:window.history.back()' class="my-auto btn btn-outline-info">
+
+            <i class="fas fa-undo"></i>
+            Go back
+        </div>
+
+    </div>
+
+    <hr class="mt-2 mb-5">
+    <!--Content-->
+    <div class="container ">
+        <div class="card shadow-lg ">
+
+            <div class="card-header text-center text-uppercase text-white bg-dark font-weight-bold">
+                Rooms's Info
+            </div>
+            <div class="card-body px-5 pt-5">
+                <div class="row col-md-12 justify-content-between ml-0 px-0" sec:authorize="hasRole('ADMIN')">
+                    <a class="btn btn-success btn-block col-md-5 my-auto ml-3 shadow-sm"
+                       th:href="@{editRoom(id=${room.id},page=${currentPage},cityNameKeyword=${cityNameKeyword},cinemaNameKeyword=${cinemaNameKeyword},roomNameKeyword=${roomNameKeyword})}">
+                        <i class="fa fa-pen  mx-1" aria-hidden="true"></i>
+                        Edit
+                    </a>
+                    <a class="btn btn-outline-danger btn-block col-md-5 my-auto mr-3 shadow-sm"
+                       th:href="@{deleteRoom(id=${room.id},page=${currentPage},cityNameKeyword=${cityNameKeyword},cinemaNameKeyword=${cinemaNameKeyword},roomNameKeyword=${roomNameKeyword})}"
+                    >
+                        <i class="fa fa-trash  mx-1" aria-hidden="true"></i>
+                        Delete
+                    </a>
+                </div>
+                <br>
+                <table class="table table-striped mt-2">
+                    <tr>
+                        <td class="font-weight-bold">ID</td>
+                        <td th:text="${room.id}"></td>
+                    </tr>
+                    <tr>
+                        <td class="font-weight-bold">Name</td>
+                        <td th:text="${room.name}"></td>
+                    </tr>
+                    <tr>
+                        <td  class="font-weight-bold">Location</td>
+                        <td th:text="${room.cinema.getName() + ' - '+room.cinema.ville.getName()}"></td>
+                    </tr>
+                    <tr>
+                        <td  class="font-weight-bold">Seats number</td>
+                        <td th:text="${room.nombrePlace}"></td>
+                    </tr>
+                </table>
+            </div>
+        </div>
+
+    </div>
+
+</div>
+</body>
+</html>

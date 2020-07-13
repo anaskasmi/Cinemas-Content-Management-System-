@@ -76,45 +76,47 @@ public class RoomsCrudController {
                 "&roomNameKeyword=" + roomNameKeyword;
     }
 
-    @GetMapping(path = "/newRoom/selectCity")
+    @GetMapping(path = "/newRoom")
     public String newRoomSelectCity(Model model) {
         List<Ville> cities = villeRepository.findAll();
-        model.addAttribute("cities", cities);
-        return "rooms/newRoom/selectCity";
-    }
-
-    @GetMapping(path = "/newRoom/selectCity/selectCinema")
-    public String newRoomSelectCinema(
-            Model model,
-            @RequestParam(name = "cityIdKeyword", defaultValue = "") Long cityIdKeyword
-    ) {
-
-        List<Cinema> cinemas = cinemaRepository.findByVille_Id(cityIdKeyword);
-        model.addAttribute("cinemas", cinemas);
-        return "rooms/newRoom/selectCinema";
-    }
-
-    @GetMapping(path = "/newRoom/selectCity/selectCinema/fillInfo")
-    public String newRoomFillInfo(
-            Model model,
-            @RequestParam(name = "cityIdKeyword", defaultValue = "") Long cityIdKeyword,
-            @RequestParam(name = "cinemaIdKeyword", defaultValue = "") Long cinemaIdKeyword
-    ) {
         Salle room = new Salle();
-        room.setCinema(cinemaRepository.findById(cinemaIdKeyword).get());
-        model.addAttribute("room",room );
-        model.addAttribute("cityIdKeyword", cityIdKeyword);
-        model.addAttribute("cinemaIdKeyword", cinemaIdKeyword);
-
-        return "rooms/newRoom/fillInfo";
+        model.addAttribute("cities", cities);
+        model.addAttribute("room", room);
+        return "rooms/newRoom";
     }
+//
+//    @GetMapping(path = "/newRoom/selectCity/selectCinema")
+//    public String newRoomSelectCinema(
+//            Model model,
+//            @RequestParam(name = "cityIdKeyword", defaultValue = "") Long cityIdKeyword
+//    ) {
+//
+//        List<Cinema> cinemas = cinemaRepository.findByVille_Id(cityIdKeyword);
+//        model.addAttribute("cinemas", cinemas);
+//        return "rooms/newRoom/selectCinema";
+//    }
+//
+//    @GetMapping(path = "/newRoom/selectCity/selectCinema/fillInfo")
+//    public String newRoomFillInfo(
+//            Model model,
+//            @RequestParam(name = "cityIdKeyword", defaultValue = "") Long cityIdKeyword,
+//            @RequestParam(name = "cinemaIdKeyword", defaultValue = "") Long cinemaIdKeyword
+//    ) {
+//        Salle room = new Salle();
+//        room.setCinema(cinemaRepository.findById(cinemaIdKeyword).get());
+//        model.addAttribute("room",room );
+//        model.addAttribute("cityIdKeyword", cityIdKeyword);
+//        model.addAttribute("cinemaIdKeyword", cinemaIdKeyword);
+//
+//        return "rooms/newRoom/fillInfo";
+//    }
 
-    @GetMapping(path = "/saveRoom")
+    @PostMapping(path = "/saveRoom")
     public String saveRoom(
             @Valid Salle room, BindingResult bindingResult
     ) {
         if (bindingResult.hasErrors()) {
-            return "rooms/newRoom/selectCity";
+            return "rooms/newRoom";
         }
         salleRepository.save(room);
         return "redirect:/showRoom?id="+room.getId();

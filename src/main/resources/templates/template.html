@@ -3,7 +3,7 @@
       xmlns:th="http://www.thymeleaf.org"
       xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
       xmlns:sec="http://www.thymeleaf.org/thymeleaf-extras-springsecurity5"
-      >
+>
 <head>
     <meta charset="UTF-8">
     <title>Cinemas</title>
@@ -30,7 +30,7 @@
 <body>
 <nav class="navbar navbar-expand-sm bg-dark navbar-dark">
     <!-- Brand -->
-    <a class="navbar-brand websiteTitle text-info mr-4" href="#" id="#title">Cinema Teal</a>
+    <a class="navbar-brand websiteTitle text-info mr-4" th:href="@{cinemasList}" id="#title">Cinema Teal</a>
 
     <!-- Links -->
     <ul class="navbar-nav">
@@ -44,10 +44,13 @@
             <a class="nav-link" th:href="@{roomsList}">Rooms</a>
         </li>
         <li class="nav-item">
-            <a class="nav-link" href="#">Tickets</a>
+            <a class="nav-link" th:href="@{projectionsList}">Projections</a>
         </li>
         <li class="nav-item">
             <a class="nav-link" href="#">Movies</a>
+        </li>
+        <li class="nav-item">
+            <a class="nav-link" href="#">Tickets</a>
         </li>
         <li class="nav-item">
             <a class="nav-link" href="#">Sessions</a>
@@ -60,7 +63,7 @@
         <!-- isAuthenticated -->
         <li class="nav-item dropdown " sec:authorize="isAuthenticated()">
             <a class="nav-link dropdown-toggle" href="#" id="navbardrop" data-toggle="dropdown">
-                <span   sec:authentication="name">
+                <span class="text-uppercase font-weight-bold" sec:authentication="name">
 
                 </span>
             </a>

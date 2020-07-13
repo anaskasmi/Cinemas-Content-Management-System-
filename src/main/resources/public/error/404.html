@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+<html lang="en">
+<!--    bootstrap-->
+<link rel="stylesheet" type="text/css" href="/webjars/bootstrap/4.1.3/css/bootstrap.min.css">
+<!--    font awsome-->
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.13.1/css/all.min.css">
+<!--    fonts -->
+<link href="https://fonts.googleapis.com/css2?family=Quicksand:wght@700&display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=Pacifico&display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=Lato&display=swap" rel="stylesheet">
+
+<!--styles-->
+<link rel="stylesheet" href="./styles.css">
+<!--    jquery-->
+<script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"
+        integrity="sha256-4+XzXVhsDmqanXGHaHvgh1gMQKX40OUvDEBTu8JcmNs=" crossorigin="anonymous"></script>
+
+<!--    bootstrap javascript-->
+<script src="/webjars/bootstrap/4.1.3/js/bootstrap.min.js"></script>
+
+
+<head>
+    <meta charset="UTF-8">
+    <title>404 Not Found</title>
+</head>
+<body>
+
+<!--<div layout:fragment="pageContent">-->
+<div class="container text-center">
+    <img src="./images/page-not-found.png" class="mb-4 mt-4" style="max-width: 10em" alt="">
+
+    <div class="bg-dark text-white text-center text-uppercase font-weight-bold py-5 ">
+        Sorry, we couldn't find what you were looking for !
+    </div>
+    <div class="mt-5">
+        <div onclick='javascript:window.history.back()' class="my-auto btn btn-lg btn-outline-dark">
+            <i class="fas fa-undo"></i>
+            Go back
+        </div>
+    </div>
+</div>
+<!--</div>-->
+</body>
+</html>

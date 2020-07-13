@@ -152,7 +152,8 @@ public class CinemasCrudController {
         }
         System.out.println("payload : " + cinemaFormPayload.toString());
 
-        Cinema cinema = new Cinema();
+        Cinema cinema = cinemaRepository.findById(cinemaFormPayload.getId()).get();
+
         Ville ville = villeRepository.findById(cinemaFormPayload.getCityId()).get();
         cinema.setId(cinemaFormPayload.getId());
         cinema.setName(cinemaFormPayload.getName());

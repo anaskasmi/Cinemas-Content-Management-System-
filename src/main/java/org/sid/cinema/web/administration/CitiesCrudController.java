@@ -89,7 +89,10 @@ public class CitiesCrudController {
         model.addAttribute("city", city);
         model.addAttribute("currentPage", page);
         model.addAttribute("nameKeyword", nameKeyword);
+        System.out.println("city before update: "+city.toString());
         return "cities/editCity";
+
+
     }
 
     @PostMapping(path = "/updateCity")
@@ -97,7 +100,14 @@ public class CitiesCrudController {
         if (bindingResult.hasErrors()) {
             return "cities/editCity?id=" + city.getId();
         }
-        villeRepository.save(city);
+        System.out.println("city after update: "+city.toString());
+
+        Ville cityToSave = villeRepository.findById(city.getId()).get();
+        cityToSave.setName(city.getName());
+        cityToSave.setAltitude(city.getAltitude());
+        cityToSave.setLatitude(city.getLatitude());
+        cityToSave.setLongitude(city.getLongitude());
+        villeRepository.save(cityToSave);
         return "redirect:/showCity?id=" + city.getId();
     }
 

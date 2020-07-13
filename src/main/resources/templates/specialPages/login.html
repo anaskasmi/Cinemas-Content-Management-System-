@@ -1,0 +1,59 @@
+<!DOCTYPE html>
+<html lang="en"
+      xmlns:th="http://www.thymeleaf.org"
+      xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
+      layout:decorator="template.html"
+>
+<head>
+    <meta charset="UTF-8">
+    <title>Login</title>
+    <link rel="stylesheet" href="./loginStyles.css">
+</head>
+<body>
+<div layout:fragment="pageContent">
+    <!-- This snippet uses Font Awesome 5 Free as a dependency. You can download it at fontawesome.io! -->
+
+    <body>
+    <div class="container">
+        <div class="row">
+            <div class="col-sm-9 col-md-7 col-lg-5 mx-auto">
+                <div class="card card-signin my-5">
+                    <div class="card-body">
+                        <h5 class="card-title text-center text-info-strong  " style="font-family: 'Pacifico', sans-serif; font-size: xx-large" >Cinema Teal</h5>
+                        <form class="form-signin" th:action="@{login}" method="post">
+                            <div th:if="${param.error}" class="alert alert-danger">
+                                Username or password is incorrect !
+                            </div>
+                            <div class="form-label-group">
+                                <input type="text" id="inputEmail" class="form-control" placeholder="Email address"
+                                       required autofocus style="cursor: text" name="username">
+                                <label for="inputEmail">Username</label>
+                            </div>
+
+                            <div class="form-label-group">
+                                <input type="password" id="inputPassword" class="form-control" placeholder="Password"
+                                       required style="cursor: text" name="password">
+                                <label for="inputPassword">Password</label>
+                            </div>
+
+                            <div class="custom-control custom-checkbox mb-3">
+                                <input type="checkbox" class="custom-control-input" id="customCheck1">
+                                <label class="custom-control-label" for="customCheck1">Remember password</label>
+                            </div>
+                            <button class="btn btn-lg btn-info btn-block text-uppercase" type="submit">Log in</button>
+                            <hr class="my-4">
+                            <button class="btn btn-lg btn-outline-info btn-block text-uppercase" th:href="@{register}">
+                                Register
+                            </button>
+
+                        </form>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    </body>
+
+</div>
+</body>
+</html>

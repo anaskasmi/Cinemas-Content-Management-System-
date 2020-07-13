@@ -39,8 +39,9 @@ public class securityConfiguration extends WebSecurityConfigurerAdapter {
                 "/payerTickets/**"
         };
 
-        http.formLogin();
-        http.authorizeRequests().antMatchers("/save**/**", "/delete**/**", "/update**/**", "/edit**/**").hasRole("ADMIN");
+        http.formLogin().loginPage("/login").defaultSuccessUrl("/cinemasList")
+        ;
+        http.authorizeRequests().antMatchers("/save**/**", "/delete**/**", "/update**/**", "/edit**/**","/new**/**").hasRole("ADMIN");
 //        http.authorizeRequests().antMatchers("/**").hasRole("USER");
 //        http.authorizeRequests().anyRequest().authenticated();
         http.csrf().ignoringAntMatchers(apiUrls);
